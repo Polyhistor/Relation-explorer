@@ -45,3 +45,20 @@ Route::get('/updateAddress', function(){
     $address->save();
 
 });
+
+
+Route::get('/read', function(){
+
+    $user = User::findOrFail(1);
+    echo $user;
+
+});
+
+
+Route::get('/delete', function(){
+
+    $user = User::findOrFail(1);
+    $user->address()->delete();
+    return 'operation complete';
+
+});
