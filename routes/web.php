@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\Address;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('/inserUser', function(){
+
+    $user = User::create(['name'=>'pouya', 'email'=>'pouya@gmail.com', 'password'=>'123']);
+
+    return $user;
+
+});
+
+
+Route::get('/insert', function(){
+
+    $user = User::findOrFail(1);
+    $address = new Address(['name'=>'1234 Houston Avenue av NY NY 1229']);
+    $user->address()->save($address);
+
+});
+
+
+Route::get('/updateAddress', function(){
+
+    $address =  Address::whereUserId(1)->first();
+    $address->name = "Updated new address";
+    $address->save();
+
 });
