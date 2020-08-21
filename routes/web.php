@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\User;
 use App\Address;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +61,23 @@ Route::get('/delete', function(){
     $user = User::findOrFail(1);
     $user->address()->delete();
     return 'operation complete';
+
+});
+
+
+Route::get('/create', function(){
+
+    $user = User::findOrFail(1);
+
+    $post = new Post(['title'=> 'my first post with edwin diaz', 'content'=>'i love laravel with edwin']);
+
+    $user->posts()->save($post);
+
+});
+
+Route::get("/read-posts", function(){
+
+    $user = User::findOrFail(1);
+    return $user->posts;
 
 });
